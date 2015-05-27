@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-8 showInvitation">
+    <%= image_tag( @invitation.event, width: "600px", height: "600px" ) %>
+  </div>
+  <div class="coll-md-4 sideBar">
+    <div class="invitationName">
+      <%= @invitation.name %>
+    </div>
+    <div class="personalize">
+      <%= link_to "Personalize design",
+        "#",
+        class: "btn btn-success" %>
+    </div>
+    <div class="backTo">
+      <%= link_to "Back to gallery",
+        root_path,
+        class: "btn btn-default" %>
+    </div>
+    <div class="addTo">
+      <% if current_user %>
+        <%= link_to "Add to favorites",
+          add_favorite_invitation_path( @invitation, type: "favorite" ),
+          method: :put,
+          class: "btn btn-default" %>
+      <% end %>
+    </div>
+  </div>
+</div>

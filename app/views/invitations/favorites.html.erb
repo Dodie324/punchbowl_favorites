@@ -1,0 +1,19 @@
+<div class="row">
+  <% if @favorites.empty? %>
+    <%= "You do not have any favorites" %>
+  <% end %>
+  <% @favorites.uniq.each do |favorite| %>
+    <div class="col-sm-4 invitations">
+      <div class="preview">
+        <%= link_to(image_tag( favorite.event, height: "275px" ), invitation_path( favorite.id )) %>
+      </div>
+      <div class="previewName">
+        <%= favorite.name %>
+        <%= image_tag( "colors.png", width: "20px", height: "20px" ) %>
+      </div>
+      <%= link_to "Remove from favorites",
+        add_favorite_invitation_path( favorite.id, type: "unfavorite" ),
+        method: :put %>
+    </div>
+  <% end %>
+</div>

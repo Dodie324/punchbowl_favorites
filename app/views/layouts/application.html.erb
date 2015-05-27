@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PbFavorites</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <%= link_to image_tag("http://www.punchbowl.com/shopping/assets/logos/logo_long-0bf7537709e3f6cb5a11e32ac382eb1c.svg", class: "navbar-brand"), root_path %>
+      <ul class="nav navbar-nav navbar-right">
+        <%- if current_user -%>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dashboard <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">My Invitations</a></li>
+                <li><a href="#">My Greeting Cards</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a hreg="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">My Invitations</a></li>
+                <li><a href="#">My Greeting Cards</a></li>
+                <li><%= link_to "My Favorites", favorites_path %>
+                <hr>
+                <li><a href="#">Account Settings</a></li>
+                <li><a href="#">Address Book</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Buy Membership</a></li>
+                <hr>
+                <li><a href="#">Get Help</a></li>
+                <hr>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <%- else -%>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <%- end -%>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container main">
+  <%- flash.each do |key, value| -%>
+    <div class="flash flash-<%= key %>">
+      <%= value %>
+    </div>
+  <%- end -%>
+
+  <%= yield %>
+
+  <%= javascript_include_tag 'application' %>
+  <%= yield :extra_footer %>
+  </div>
+</body>
+</html>

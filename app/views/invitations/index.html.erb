@@ -1,0 +1,13 @@
+<div class="row">
+  <% @invitations.each do |invitation| %>
+    <div class="col-sm-4 invitations">
+      <div class="preview">
+        <%= link_to(image_tag( invitation.event, height: "275px" ), invitation_path( invitation )) %>
+      </div>
+      <div class="previewName">
+        <%= invitation.name %>
+        <%= image_tag( "colors.png", width: "20px", height: "20px" ) %>
+      </div>
+    </div>
+  <% end %>
+</div>
